@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Amazigh Personnel</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .item-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .item-card:hover .item-image img {
+            transform: scale(1.1);
+        }
+
+        .item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .item-card:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .item-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .item-content {
+            padding: 1.5rem;
+        }
+
+        .item-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-subtitle {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .item-description {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .category-title {
+            text-align: center;
+            color: #333;
+            margin: 2rem 0;
+            font-size: 2.5rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-image {
+            transform: scale(1);
+        }
+
+        .close-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 30px;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2em;
+            color: #333;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .modal-description {
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .modal-description strong {
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        /* Timeline style for achievements */
+        .timeline {
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid #3498db;
+        }
+
+        .timeline-item {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            width: calc(100% - 260px);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-open'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="wars.html" class="link flex">
+                            <i class='bx bx-shield-quarter'></i>
+                            <span>Wars</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="characters.html" class="link flex active">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Personnel</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Clothes</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-movie-play'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Musical Groups</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <nav class="nav">
+            <i class='bx bx-menu' id="sidebar-open"></i>
+        </nav>
+
+        <div class="content">
+            <h1 class="category-title">Famous Amazigh Personnel</h1>
+            <div class="grid-container">
+                <!-- Ahmed al-Hiba -->
+                <div class="item-card" onclick="openModal('hiba')">
+                    <div class="item-image">
+                        <img src="images/hiba.jpg" alt="Ahmed al-Hiba">
+                        <div class="item-overlay">
+                            <h3>Click for details</h3>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h2 class="item-title">Ahmed al-Hiba</h2>
+                        <p class="item-subtitle">Sahrawi Leader</p>
+                        <p class="item-description">Known as the 'Blue Sultan'</p>
+                    </div>
+                </div>
+
+                <!-- Mohamed Améziane -->
+                <div class="item-card" onclick="openModal('ameziane')">
+                    <div class="item-image">
+                        <img src="images/ameziane.jpg" alt="Mohamed Améziane">
+                        <div class="item-overlay">
+                            <h3>Click for details</h3>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h2 class="item-title">Mohamed Améziane</h2>
+                        <p class="item-subtitle">Rif Resistance Leader</p>
+                        <p class="item-description">Led resistance in northern Morocco</p>
+                    </div>
+                </div>
+
+                <!-- Ahmed al-Raisuni -->
+                <div class="item-card" onclick="openModal('raisuni')">
+                    <div class="item-image">
+                        <img src="images/raisuni.jpg" alt="Ahmed al-Raisuni">
+                        <div class="item-overlay">
+                            <h3>Click for details</h3>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <h2 class="item-title">Ahmed al-Raisuni</h2>
+                        <p class="item-subtitle">Jbala Leader</p>
+                        <p class="item-description">Powerful figure in northern Morocco</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Ahmed al-Hiba Modal -->
+    <div id="hiba" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('hiba')">&times;</span>
+            <img src="images/hiba.jpg" alt="Ahmed al-Hiba" class="modal-image">
+            <h2 class="modal-title">Ahmed al-Hiba</h2>
+            <div class="modal-description">
+                <p>Known as the 'Blue Sultan', he led resistance in southern Morocco</p>
+                <div class="timeline">
+                    <div class="timeline-item">Proclaimed Sultan in Tiznit (1912)</div>
+                    <div class="timeline-item">Led resistance in the south</div>
+                    <div class="timeline-item">Fought French colonial forces</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mohamed Améziane Modal -->
+    <div id="ameziane" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('ameziane')">&times;</span>
+            <img src="images/ameziane.jpg" alt="Mohamed Améziane" class="modal-image">
+            <h2 class="modal-title">Mohamed Améziane</h2>
+            <div class="modal-description">
+                <p>A key figure in the Rif resistance against Spanish colonization</p>
+                <div class="timeline">
+                    <div class="timeline-item">Led resistance in Rif Mountains</div>
+                    <div class="timeline-item">Organized tribal alliances</div>
+                    <div class="timeline-item">Defended Amazigh territories</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ahmed al-Raisuni Modal -->
+    <div id="raisuni" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('raisuni')">&times;</span>
+            <img src="images/raisuni.jpg" alt="Ahmed al-Raisuni" class="modal-image">
+            <h2 class="modal-title">Ahmed al-Raisuni</h2>
+            <div class="modal-description">
+                <p>Influential leader who controlled much of northern Morocco</p>
+                <div class="timeline">
+                    <div class="timeline-item">Controlled Jbala region</div>
+                    <div class="timeline-item">Fought colonial powers</div>
+                    <div class="timeline-item">Major political influence</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

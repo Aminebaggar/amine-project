@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Amazigh Characters</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/characters.css">
+    <style>
+        .container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .character-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .character-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .character-info {
+            padding: 1.5rem;
+        }
+
+        .character-name {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .character-dates {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .character-description {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .character-card.expanded .character-description {
+            max-height: none;
+        }
+
+        .achievements {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .character-card.expanded .achievements {
+            display: block;
+        }
+
+        .achievements h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievements ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .achievements li {
+            color: #34495e;
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .achievements li:before {
+            content: '•';
+            color: #e74c3c;
+            position: absolute;
+            left: 0.5rem;
+        }
+
+        .expand-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .character-card.expanded .expand-btn {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 0;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="characters.html" class="link flex active">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mode">
+            <div class="moon-sun">
+                <i class='bx bx-moon icon moon'></i>
+                <i class='bx bx-sun icon sun'></i>
+            </div>
+            <span class="mode-text text">Dark Mode</span>
+
+            <div class="toggle-switch">
+                <span class="switch"></span>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="nav">
+        <i class='bx bx-menu' id="sidebar-open"></i>
+    </nav>
+
+    <div class="container">
+        <div class="characters-grid">
+            <!-- Characters will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const characters = [
+            {
+                name: "Masinissa",
+                dates: "238 BC - 148 BC",
+                image: "../images/masinissa.jpg",
+                shortDesc: "First King of Numidia who unified the Numidian tribes and created a powerful kingdom.",
+                longDesc: "Masinissa was a remarkable ruler who transformed Numidia into a powerful and prosperous kingdom. Born into the Massylii tribe, he received his education in Carthage and later became a crucial ally to Rome. His 60-year reign marked the beginning of a golden age for Numidia, during which he introduced advanced agricultural techniques, established permanent settlements, and promoted Punic and Hellenistic culture. His diplomatic skills and military prowess helped him unite the various Numidian tribes under one banner, creating the first unified Numidian state in history.",
+                achievements: [
+                    "United the Massylii and Masaesyli tribes",
+                    "Created the first unified Numidian state",
+                    "Developed agriculture and urban centers",
+                    "Established diplomatic relations with Rome"
+                ]
+            },
+            {
+                name: "Youssef Ibn Tashfin",
+                dates: "1061 - 1106",
+                image: "../images/tashfin.jpg",
+                shortDesc: "The most prominent Almoravid Sultan who built a vast empire spanning North Africa and Al-Andalus.",
+                longDesc: "Youssef Ibn Tashfin was the most famous of the Almoravid rulers, known for his military prowess, administrative skills, and piety. He founded Marrakech as his capital in 1070 and transformed it into a major cultural and economic center. Under his rule, the Almoravid empire reached its greatest extent, stretching from Senegal to Spain. He was known for his just rule, support of scholars, and development of sophisticated irrigation systems. His intervention in Al-Andalus helped preserve Muslim rule there for several more centuries.",
+                achievements: [
+                    "Founded the city of Marrakech",
+                    "United the Maghreb under one rule",
+                    "Established advanced irrigation systems",
+                    "Protected Al-Andalus Muslim states"
+                ]
+            },
+            {
+                name: "Dihya (Al-Kahina)",
+                dates: "7th Century CE",
+                image: "../images/dihya.jpg",
+                shortDesc: "A powerful Amazigh queen who led the resistance against Arab expansion in North Africa.",
+                longDesc: "Dihya, also known as Al-Kahina (the Priestess), was a legendary Amazigh queen who led the indigenous resistance against the Arab expansion in North Africa. She was known for her political acumen, military strategy, and ability to unite various tribes. Her forces successfully repelled several Arab armies, and she maintained Amazigh independence for many years. Her leadership style challenged traditional gender roles and demonstrated the significant role of women in Amazigh society. Though eventually defeated, she became a symbol of resistance and indigenous rights.",
+                achievements: [
+                    "United various Amazigh tribes",
+                    "Defeated Arab armies multiple times",
+                    "Protected Amazigh independence",
+                    "Became a symbol of resistance"
+                ]
+            },
+            {
+                name: "Ibn Khaldun",
+                dates: "1332 - 1406",
+                image: "../images/ibn-khaldun.jpg",
+                shortDesc: "A pioneering historian and scholar who revolutionized the understanding of history and social sciences.",
+                longDesc: "Ibn Khaldun was a groundbreaking intellectual who revolutionized the fields of history, sociology, and economics. His masterpiece, the Muqaddimah, introduced scientific methodology to the study of history and society. He developed theories about social cohesion, the rise and fall of civilizations, and economic principles that were centuries ahead of their time. His work influenced both Islamic and Western scholarship, and he is considered one of the greatest historians and social theorists of all time.",
+                achievements: [
+                    "Wrote the Muqaddimah",
+                    "Founded modern sociology",
+                    "Developed scientific history",
+                    "Influenced global scholarship"
+                ]
+            },
+            {
+                name: "Ibn Battuta",
+                dates: "1304 - 1369",
+                image: "../images/ibn-battuta.jpg",
+                shortDesc: "The greatest traveler of the medieval world who explored Asia, Africa, and Europe.",
+                longDesc: "Ibn Battuta was a medieval Moroccan scholar and explorer who traveled more extensively than any other known medieval traveler. His journeys, lasting almost 30 years, covered nearly the entire Islamic world, extending from North Africa to Southeast Asia, and from Russia to the Maldives. His book, the Rihla, provides detailed accounts of the cultures, peoples, and places he visited, making it an invaluable historical document. He served as a judge in various kingdoms and witnessed major historical events of his time.",
+                achievements: [
+                    "Traveled over 75,000 miles",
+                    "Wrote the Rihla (Book of Travels)",
+                    "Served as Qadi in multiple kingdoms",
+                    "Documented diverse cultures"
+                ]
+            },
+            {
+                name: "Tariq ibn Ziyad",
+                dates: "670 - 720",
+                image: "../images/tariq.jpg",
+                shortDesc: "A brilliant military commander who led the Islamic conquest of Visigothic Hispania.",
+                longDesc: "Tariq ibn Ziyad was a military commander who led the Islamic conquest of Visigothic Hispania in 711-712 CE. His landing point, Gibraltar, is named after him (Jabal Tariq - Mountain of Tariq). Known for his inspiring leadership and strategic brilliance, he led a small force that defeated the much larger Visigothic army. His conquest opened a new chapter in European history, leading to centuries of Muslim presence in Iberia and the creation of a unique multicultural civilization.",
+                achievements: [
+                    "Led the conquest of Hispania",
+                    "Established strategic military tactics",
+                    "Built cross-cultural alliances",
+                    "Left lasting historical legacy"
+                ]
+            },
+            {
+                name: "Ahmed al-Raisuni",
+                dates: "1871 - 1925",
+                image: "../images/raisuni3.jpg",
+                shortDesc: "A charismatic resistance leader who fought against European colonial powers.",
+                longDesc: "Ahmed al-Raisuni was a powerful figure in northern Morocco who led resistance against European colonial expansion. Known for his charismatic leadership and complex personality, he controlled much of the Jbala region and became a symbol of Moroccan independence. His resistance activities and negotiations with various powers helped maintain Moroccan sovereignty in the face of colonial pressures. His life inspired numerous books and stories, including American journalist Ion Perdicaris's account of his captivity.",
+                achievements: [
+                    "Led resistance in Jbala region",
+                    "United local tribes",
+                    "Defended Moroccan sovereignty",
+                    "Inspired independence movement"
+                ]
+            },
+            {
+                name: "Abdelkrim El Khattabi",
+                dates: "1882 - 1963",
+                image: "../images/abdelkrim.jpg",
+                shortDesc: "Founder of the Republic of the Rif and legendary resistance leader.",
+                longDesc: "Abdelkrim El Khattabi was a revolutionary leader who established the Republic of the Rif and successfully resisted Spanish and French colonial forces. His military innovations in guerrilla warfare influenced independence movements worldwide. He created a modern state with a constitution, reform program, and regular army. His success in defeating a modern European army with traditional tribal forces earned him global recognition. Even in exile, he continued to support North African independence movements and became a symbol of resistance against colonialism.",
+                achievements: [
+                    "Founded the Republic of the Rif",
+                    "Developed modern guerrilla tactics",
+                    "Implemented social reforms",
+                    "Inspired global anti-colonialism"
+                ]
+            },
+            {
+                name: "Mouha ou Hammou Zayani",
+                dates: "1863 - 1921",
+                image: "../images/mouha-zayani.jpg",
+                shortDesc: "A powerful resistance leader from the Middle Atlas who led the Zayan confederation.",
+                longDesc: "Mouha ou Hammou Zayani was a remarkable tribal leader who led the Zayan confederation in resisting French colonial expansion into the Middle Atlas mountains. His strategic brilliance in mountain warfare and ability to unite various tribes made him a formidable opponent. He maintained the independence of his region for many years through a combination of military resistance and diplomatic negotiations. His legacy continues to inspire Amazigh pride and identity in the Middle Atlas region.",
+                achievements: [
+                    "United Zayan tribes",
+                    "Resisted French expansion",
+                    "Protected Middle Atlas region",
+                    "Preserved tribal autonomy"
+                ]
+            }
+        ];
+
+        function createCharacterCard(character) {
+            return `
+                <div class="character-card">
+                    <div class="character-image-container">
+                        <img src="${character.image}" alt="${character.name}" class="character-image">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">${character.name}</h3>
+                        <div class="character-dates">${character.dates}</div>
+                        <p class="character-description short">${character.shortDesc}</p>
+                        <p class="character-description long" style="display: none">${character.longDesc}</p>
+                        <div class="achievements">
+                            <h4>Key Achievements</h4>
+                            <ul>
+                                ${character.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="expand-btn">+</button>
+                </div>
+            `;
+        }
+
+        // Populate characters
+        const grid = document.querySelector('.characters-grid');
+        characters.forEach(character => {
+            grid.innerHTML += createCharacterCard(character);
+        });
+
+        // Add click handlers
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const shortDesc = this.querySelector('.character-description.short');
+                const longDesc = this.querySelector('.character-description.long');
+                const expandBtn = this.querySelector('.expand-btn');
+
+                this.classList.toggle('expanded');
+                
+                if (this.classList.contains('expanded')) {
+                    shortDesc.style.display = 'none';
+                    longDesc.style.display = 'block';
+                    expandBtn.textContent = '-';
+                } else {
+                    shortDesc.style.display = 'block';
+                    longDesc.style.display = 'none';
+                    expandBtn.textContent = '+';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

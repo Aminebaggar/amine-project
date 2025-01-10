@@ -1,0 +1,159 @@
+/* Wars page specific styles */
+.war-timeline {
+    padding: 50px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.war-intro {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.war-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 682px;  /* Matching your image width */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.war-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.war-card.animate {
+    animation: fadeInUp 1s ease forwards;
+}
+
+.war-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.war-year {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #666;
+    padding: 8px 16px;
+    background: #f0f4ff;
+    border-radius: 8px;
+}
+
+.war-title {
+    font-size: 1.8em;
+    color: #4070f4;
+    margin: 0;
+}
+
+.war-image {
+    width: 682px;  /* Exact width from your image */
+    height: 500px; /* Exact height from your image */
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 20px 0;
+    transition: transform 0.3s ease;
+}
+
+.war-image:hover {
+    transform: scale(1.02);
+}
+
+.war-description {
+    line-height: 1.8;
+    color: #444;
+    margin: 20px 0;
+}
+
+.war-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.detail-value {
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+.timeline-connector {
+    width: 2px;
+    height: 50px;
+    background: #4070f4;
+    margin: 0 auto;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+.timeline-connector.animate {
+    animation: growConnector 0.8s ease forwards;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes growConnector {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .war-card {
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .war-card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .war-image {
+        width: 100%;
+        height: auto;
+    }
+}

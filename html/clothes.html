@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazigh Traditional Clothing</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/clothes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .page-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .page-title span {
+            color: #4070f4;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="clothes.html" class="link flex active">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="clothes-container">
+        <nav class="nav">
+            <i class='bx bx-menu' id="sidebar-open"></i>
+        </nav>
+
+        <h1 class="page-title">Traditional Amazigh <span>Fashion</span></h1>
+
+        <h2 class="section-title reveal">Traditional Clothing</h2>
+        <div class="clothes-grid" id="clothingGrid">
+            <!-- Clothing items will be populated by JavaScript -->
+        </div>
+
+        <h2 class="section-title reveal">Traditional Accessories</h2>
+        <div class="clothes-grid" id="accessoriesGrid">
+            <!-- Accessories will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-image">
+                <img src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2></h2>
+                <p class="original-name"></p>
+                <p class="description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Clothing data
+        const clothingData = {
+            ahdoun: {
+                name: "Ahdoun (Traditional Cloak)",
+                originalName: "أهدون (السلهام)",
+                description: "The Ahdoun, also known as Selham or Burnus, is a traditional woolen cloak worn over the shoulders. This elegant garment provides warmth and protection from cold weather while maintaining a dignified appearance.",
+                image: "../images/clothes/ahdoun.jpg"
+            },
+            fartita: {
+                name: "Fartita (Traditional Skirt)",
+                originalName: "الفرطيطا (الصايا)",
+                description: "The Fartita, or Saya, is a beautifully decorated traditional skirt. Made from high-quality fabric, it features intricate patterns and designs that showcase Amazigh craftsmanship.",
+                image: "../images/clothes/fartita.jpg"
+            },
+            akchab: {
+                name: "Akchab (Traditional Caftan)",
+                originalName: "اقشاب (القفطان)",
+                description: "The Akchab is the Amazigh version of the traditional caftan. Known for its exquisite embroidery and detailed craftsmanship, this garment represents the height of Amazigh fashion and is often worn during formal occasions.",
+                image: "../images/clothes/akchab.jpg"
+            },
+            wadal: {
+                name: "Wadal (Head Cover)",
+                originalName: "وادال (الزيف)",
+                description: "The Wadal, also known as Ouzal, is a versatile piece of cloth used to cover the head or shoulders. It often features traditional patterns and can be styled in various ways, making it both practical and fashionable.",
+                image: "../images/clothes/wadal.jpg"
+            },
+            lktib: {
+                name: "Lktib (Red Ceremonial Cloth)",
+                originalName: "القطيب (الزيف الأحمر)",
+                description: "The Lktib is a distinctive red ceremonial cloth that's decorated with additional colors and traditional patterns. This vibrant piece is often worn during special occasions and celebrations.",
+                image: "../images/clothes/lktib.jpg"
+            },
+            tamlhaft: {
+                name: "Tamlhaft (Women's Wrap Dress)",
+                originalName: "تاملحافت",
+                description: "The Tamlhaft is a traditional women's dress from the Tafraout region. This elegant wrap dress is designed to be both comfortable and stylish, consisting of a long piece of cloth that's artfully draped around the body.",
+                image: "../images/clothes/tamlhaft.jpg"
+            },
+            ajlami: {
+                name: "Ajlami (Men's Traditional Robe)",
+                originalName: "اجلامي",
+                description: "The Ajlami is a distinguished men's garment similar to a jellaba or burnous. This loose-fitting robe combines comfort with traditional style, making it perfect for both daily wear and special occasions.",
+                image: "../images/clothes/ajlami.jpg"
+            },
+            foukia: {
+                name: "Foukia (Outer Garment)",
+                originalName: "الفوقيا",
+                description: "The Foukia is a traditional outer garment worn over other clothes. It adds an extra layer of warmth and style to the outfit while maintaining the wearer's modesty and elegance.",
+                image: "../images/clothes/foukia.jpg"
+            }
+        };
+
+        // Accessories data
+        const accessoriesData = {
+            tifolot: {
+                name: "Tifolot (Silver Forehead Ornament)",
+                originalName: "تيفولوت (أو تيغولت)",
+                description: "The Tifolot is an exquisite silver forehead ornament adorned with geometric patterns and precious stones like agate. This stunning piece is worn during special occasions and ceremonies, adding elegance to traditional attire.",
+                image: "../images/accessories/tifolot.jpg"
+            },
+            akhnag: {
+                name: "Akhnag (Traditional Necklace)",
+                originalName: "أخناق",
+                description: "The Akhnag is a beautifully crafted silver necklace featuring intricate details and colored precious stones. These necklaces are masterpieces of Amazigh jewelry-making, combining traditional designs with precious materials.",
+                image: "../images/accessories/akhnag.jpg"
+            },
+            oumlil: {
+                name: "Oumlil (Ceremonial Necklace)",
+                originalName: "أو مليل",
+                description: "The Oumlil is a long ceremonial necklace made from silver or beads. These elegant pieces are worn during special occasions and feature traditional Amazigh patterns that tell stories of cultural heritage.",
+                image: "../images/accessories/oumlil.jpg"
+            },
+            hrouz: {
+                name: "Hrouz (Amulet Box)",
+                originalName: "الحروز",
+                description: "The Hrouz are decorative boxes made from silver or copper, designed to hold amulets or written prayers. These pieces combine spiritual significance with artistic craftsmanship, making them both beautiful and meaningful.",
+                image: "../images/accessories/hrouz.jpg"
+            },
+            issni: {
+                name: "Issni (Traditional Bracelet)",
+                originalName: "إيسني",
+                description: "The Issni are wide bracelets that showcase traditional Amazigh patterns. Each piece is a testament to the skill of Amazigh artisans, featuring detailed engravings and designs passed down through generations.",
+                image: "../images/accessories/issni.jpg"
+            },
+            kmit: {
+                name: "Kmit (Silver Ring)",
+                originalName: "الكميت (أو تازييت)",
+                description: "The Kmit are intricately designed silver rings worn daily or during special occasions. Each ring features fine engravings that reflect traditional Amazigh motifs and symbols.",
+                image: "../images/accessories/kmit.jpg"
+            },
+            tazlmat: {
+                name: "Tazlmat (Decorative Earrings)",
+                originalName: "تازلمات",
+                description: "The Tazlmat are large, ornate earrings featuring geometric shapes and traditional designs. These statement pieces showcase the bold and beautiful aesthetic of Amazigh jewelry.",
+                image: "../images/accessories/tazlmat.jpg"
+            },
+            iskioun: {
+                name: "Iskioun (Nature-Inspired Bracelet)",
+                originalName: "إيسكيون",
+                description: "The Iskioun are wide bracelets decorated with patterns inspired by nature. These pieces reflect the Amazigh people's connection to their environment through artistic expression.",
+                image: "../images/accessories/iskioun.jpg"
+            },
+            mashbouh: {
+                name: "Mashbouh (Shoulder Pin)",
+                originalName: "المشبوح",
+                description: "The Mashbouh are decorative metal pieces worn on the shoulder, secured with a pin. These functional yet beautiful accessories are used to fasten traditional clothing while adding an elegant touch.",
+                image: "../images/accessories/mashbouh.jpg"
+            }
+        };
+
+        // Function to create item cards with animation
+        function createItemCards(data, containerId) {
+            const container = document.getElementById(containerId);
+            Object.entries(data).forEach(([key, item], index) => {
+                const card = document.createElement('div');
+                card.className = 'clothes-card reveal';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.dataset.item = key;
+                card.dataset.type = containerId === 'clothingGrid' ? 'clothing' : 'accessories';
+                
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onerror="this.src='../images/placeholder.jpg'">
+                    <div class="clothes-info">
+                        <h3>${item.name}</h3>
+                        <p class="original-name">${item.originalName}</p>
+                        <p>${item.description.substring(0, 100)}...</p>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Create cards for both sections
+        createItemCards(clothingData, 'clothingGrid');
+        createItemCards(accessoriesData, 'accessoriesGrid');
+
+        // Modal functionality
+        const modal = document.getElementById('itemModal');
+        const closeModal = document.querySelector('.close-modal');
+        
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.clothes-card');
+            if (card) {
+                const itemKey = card.dataset.item;
+                const itemType = card.dataset.type;
+                const item = itemType === 'clothing' ? clothingData[itemKey] : accessoriesData[itemKey];
+                
+                modal.querySelector('.modal-image img').src = item.image;
+                modal.querySelector('.modal-image img').alt = item.name;
+                modal.querySelector('h2').textContent = item.name;
+                modal.querySelector('.original-name').textContent = item.originalName;
+                modal.querySelector('.description').textContent = item.description;
+                
+                modal.classList.add('active');
+            }
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Scroll animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // Sidebar functionality
+        const sidebar = document.querySelector(".sidebar");
+        const sidebarOpen = document.querySelector("#sidebar-open");
+        const toggle = document.querySelector(".toggle");
+
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
+        sidebarOpen.addEventListener("click", () => {
+            sidebar.classList.remove("close");
+        });
+    </script>
+</body>
+</html>

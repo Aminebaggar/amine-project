@@ -1,0 +1,129 @@
+/* Characters page specific styles */
+.container {
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.character-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+}
+
+.character-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.character-info {
+    padding: 1.5rem;
+}
+
+.character-name {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.character-dates {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.character-description {
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.achievements {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.achievements h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.achievements ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.achievements li {
+    color: #34495e;
+    padding: 0.3rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.achievements li:before {
+    content: '•';
+    color: #e74c3c;
+    position: absolute;
+    left: 0.5rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        margin-left: 0;
+        padding: 15px;
+    }
+    
+    .characters-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+/* Dark mode styles */
+body.dark .character-card {
+    background: #242526;
+}
+
+body.dark .character-name {
+    color: #fff;
+}
+
+body.dark .character-dates {
+    color: #ff7675;
+}
+
+body.dark .character-description {
+    color: #ddd;
+}
+
+body.dark .achievements {
+    background: #18191a;
+}
+
+body.dark .achievements h4 {
+    color: #fff;
+}
+
+body.dark .achievements li {
+    color: #ddd;
+}
+
+body.dark .achievements li:before {
+    color: #ff7675;
+}

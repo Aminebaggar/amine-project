@@ -1,0 +1,351 @@
+/* Modern Animations for Actors and Music Pages */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale Up Animation */
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Slide In From Left */
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Rotate In Animation */
+@keyframes rotateIn {
+    from {
+        transform: rotate(-10deg) scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Applying animations to elements */
+
+/* Content Section Animation */
+.content-section {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Grid Items Animation */
+.content-grid > * {
+    opacity: 0;
+    animation: scaleUp 0.6s ease-out forwards;
+}
+
+/* Staggered animation for grid items */
+.content-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.content-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.content-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.content-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.content-grid > *:nth-child(n+5) { animation-delay: 0.5s; }
+
+/* Headings Animation */
+h2 {
+    animation: slideFromLeft 0.8s ease-out forwards;
+}
+
+/* Hover Effects */
+.content-grid > * {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-grid > *:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Image hover effect */
+.content-grid img {
+    transition: transform 0.4s ease;
+}
+
+.content-grid > *:hover img {
+    transform: scale(1.05);
+}
+
+/* Text content animation */
+.content-grid p, .content-grid h3 {
+    transition: color 0.3s ease;
+}
+
+.content-grid > *:hover p,
+.content-grid > *:hover h3 {
+    color: #4a90e2;
+}
+
+/* Loading animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-size: 1000px 100%;
+}
+
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Base font styles */
+:root {
+    --primary-font: 'Montserrat', sans-serif;
+    --heading-font: 'Cormorant Garamond', serif;
+}
+
+body {
+    font-family: var(--primary-font);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+}
+
+/* Page transition animation */
+.page-transition {
+    animation: pageTransition 1s ease-out;
+}
+
+@keyframes pageTransition {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card hover animations */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Image hover effects */
+.image-hover {
+    overflow: hidden;
+}
+
+.image-hover img {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-hover:hover img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Text reveal animation */
+.text-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.text-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #e74c3c;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-reveal.active::after {
+    transform: scaleX(1);
+}
+
+/* Button hover effect */
+.btn-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-hover:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Sidebar animation */
+.sidebar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.closed {
+    transform: translateX(-100%);
+}
+
+/* Page title animation */
+.page-title {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    padding: 2rem 0;
+}
+
+.page-title h1 {
+    animation: titleSlideUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-title span {
+    animation: titleColor 2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #e74c3c;
+}
+
+@keyframes titleSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Grid item animations */
+.grid-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for grid items */
+.grid-container {
+    display: grid;
+}
+
+.grid-container > * {
+    animation: staggerFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+@keyframes staggerFade {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Generate stagger delays for up to 20 items */
+.grid-container > *:nth-child(1) { animation-delay: 0.1s; }
+.grid-container > *:nth-child(2) { animation-delay: 0.2s; }
+.grid-container > *:nth-child(3) { animation-delay: 0.3s; }
+.grid-container > *:nth-child(4) { animation-delay: 0.4s; }
+.grid-container > *:nth-child(5) { animation-delay: 0.5s; }
+.grid-container > *:nth-child(6) { animation-delay: 0.6s; }
+.grid-container > *:nth-child(7) { animation-delay: 0.7s; }
+.grid-container > *:nth-child(8) { animation-delay: 0.8s; }
+.grid-container > *:nth-child(9) { animation-delay: 0.9s; }
+.grid-container > *:nth-child(10) { animation-delay: 1.0s; }
+/* Add more if needed */
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading animation */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e74c3c;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: loading 0.8s linear infinite;
+}
+
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

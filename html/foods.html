@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazigh Foods</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .foods-container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .page-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .page-title span {
+            color: #e74c3c;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, #2c3e50, #e74c3c, #2c3e50);
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .food-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .food-card:hover .food-image img {
+            transform: scale(1.1);
+        }
+
+        .food-info {
+            padding: 1.5rem;
+        }
+
+        .food-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .food-type {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .food-description {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .food-card.expanded .food-description {
+            max-height: none;
+        }
+
+        .expand-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .food-card.expanded .expand-btn {
+            transform: rotate(45deg);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #4070f4;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .modal-image {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredients-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4070f4;
+        }
+
+        [dir="rtl"] .foods-container {
+            margin-right: 260px;
+            margin-left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .foods-container {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="foods.html" class="link flex active">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mode">
+            <div class="moon-sun">
+                <i class='bx bx-moon icon moon'></i>
+                <i class='bx bx-sun icon sun'></i>
+            </div>
+            <span class="mode-text text">Dark Mode</span>
+
+            <div class="toggle-switch">
+                <span class="switch"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="foods-container">
+        <nav class="nav">
+            <i class='bx bx-menu' id="sidebar-open"></i>
+        </nav>
+        <div class="page-title">
+            <h1>Traditional <span>Foods</span></h1>
+        </div>
+        <div class="food-grid">
+            <div class="food-card" data-food="takla">
+                <div class="food-image">
+                    <img src="../images/foods/takla.jpg" alt="Takla (Asida)">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Takla (Asida)</h3>
+                    <p class="food-type">Traditional porridge made from corn or barley flour</p>
+                    <p class="food-description">Traditional porridge made from corn or barley flour, commonly served during special occasions like the Amazigh New Year (January).</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="berkukes">
+                <div class="food-image">
+                    <img src="../images/foods/berkukes.jpg" alt="Berkukes">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Berkukes</h3>
+                    <p class="food-type">Large couscous-like pasta served with broth and vegetables</p>
+                    <p class="food-description">A traditional dish made with hand-rolled pasta similar to couscous but larger in size, cooked with broth and vegetables.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="badaz">
+                <div class="food-image">
+                    <img src="../images/foods/badaz.jpg" alt="Badaz">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Badaz</h3>
+                    <p class="food-type">Corn couscous, a traditional variation of regular couscous</p>
+                    <p class="food-description">A traditional couscous made with corn flour instead of wheat, prepared in the same way as regular couscous.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="ourkimen">
+                <div class="food-image">
+                    <img src="../images/foods/ourkimen.jpg" alt="Ourkimen">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Ourkimen</h3>
+                    <p class="food-type">Traditional Atlas soup made with barley or wheat</p>
+                    <p class="food-description">A famous Atlas soup made with barley or wheat, vegetables, and traditional spices.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="toumint">
+                <div class="food-image">
+                    <img src="../images/foods/toumint.jpg" alt="Toumint (Zamita)">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Toumint (Zamita)</h3>
+                    <p class="food-type">Roasted barley flour mixed with water, milk, or oil</p>
+                    <p class="food-description">Roasted barley flour mixed with water, milk, or oil to create a nutritious and quick meal.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="lebsis">
+                <div class="food-image">
+                    <img src="../images/foods/lebsis.jpg" alt="Lebsis">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Lebsis</h3>
+                    <p class="food-type">Barley or wheat dish prepared with milk or buttermilk</p>
+                    <p class="food-description">A nutritious and simple dish made from barley or wheat, prepared with milk or buttermilk.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="lemris">
+                <div class="food-image">
+                    <img src="../images/foods/lemris.jpg" alt="Lemris">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Lemris</h3>
+                    <p class="food-type">Traditional soup that varies by region</p>
+                    <p class="food-description">A traditional soup that varies by region, made with buttermilk or butter and various ingredients.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="tafernut">
+                <div class="food-image">
+                    <img src="../images/foods/tafernut.jpg" alt="Tafernut">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Tafernut</h3>
+                    <p class="food-type">Traditional round Amazigh bread baked in clay ovens</p>
+                    <p class="food-description">Traditional round Amazigh bread baked in clay ovens, typically served with argan oil or natural butter. This bread is a staple of Amazigh cuisine and is known for its unique texture and flavor.</p>
+                </div>
+            </div>
+            <div class="food-card" data-food="taqsha">
+                <div class="food-image">
+                    <img src="../images/foods/taqsha.jpg" alt="Taqsha">
+                </div>
+                <div class="food-info">
+                    <h3 class="food-name">Taqsha (Bissara)</h3>
+                    <p class="food-type">Traditional fava bean soup made with dried and mashed fava beans</p>
+                    <p class="food-description">Traditional fava bean soup made with dried and mashed fava beans, olive oil, and spices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="foodModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <h3>Description</h3>
+                    <p class="description"></p>
+                    <h3>Ingredients</h3>
+                    <ul class="ingredients-list"></ul>
+                    <h3>Preparation</h3>
+                    <p class="preparation"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Food data with preparation steps
+        const foodData = {
+            takla: {
+                name: "Takla (Asida)",
+                description: "A traditional porridge made from corn or barley flour, commonly served during special occasions like the Amazigh New Year (January).",
+                ingredients: [
+                    "Corn or barley flour",
+                    "Water",
+                    "Salt",
+                    "Butter or oil (for serving)"
+                ],
+                preparation: "1. Boil water with salt\n2. Gradually add flour while stirring constantly\n3. Cook until thickened\n4. Serve with butter or oil"
+            },
+            berkukes: {
+                name: "Berkukes",
+                description: "A traditional dish made with hand-rolled pasta similar to couscous but larger in size, cooked with broth and vegetables.",
+                ingredients: [
+                    "Wheat flour",
+                    "Mixed vegetables",
+                    "Meat (optional)",
+                    "Spices",
+                    "Olive oil"
+                ],
+                preparation: "1. Prepare berkukes granules\n2. Cook meat and vegetables with spices\n3. Steam berkukes\n4. Mix ingredients and serve"
+            },
+            badaz: {
+                name: "Badaz",
+                description: "A traditional couscous made with corn flour instead of wheat, prepared in the same way as regular couscous.",
+                ingredients: [
+                    "Corn flour",
+                    "Vegetables",
+                    "Broth",
+                    "Spices"
+                ],
+                preparation: "1. Prepare couscous granules from corn flour\n2. Cook vegetables and broth\n3. Steam the couscous\n4. Serve with broth and vegetables"
+            },
+            ourkimen: {
+                name: "Ourkimen",
+                description: "A famous Atlas soup made with barley or wheat, vegetables, and traditional spices.",
+                ingredients: [
+                    "Barley or wheat",
+                    "Vegetables",
+                    "Spices",
+                    "Olive oil"
+                ],
+                preparation: "1. Soak the grains\n2. Cook grains with vegetables\n3. Add spices\n4. Simmer until all ingredients are tender"
+            },
+            toumint: {
+                name: "Toumint (Zamita)",
+                description: "Roasted barley flour mixed with water, milk, or oil to create a nutritious and quick meal.",
+                ingredients: [
+                    "Roasted barley flour",
+                    "Water or milk",
+                    "Oil",
+                    "Sugar (optional)"
+                ],
+                preparation: "1. Roast barley flour\n2. Mix flour with liquids\n3. Add oil and sugar if desired\n4. Serve immediately"
+            },
+            lebsis: {
+                name: "Lebsis",
+                description: "A nutritious and simple dish made from barley or wheat, prepared with milk or buttermilk.",
+                ingredients: [
+                    "Barley or wheat",
+                    "Milk or buttermilk",
+                    "Sugar (optional)",
+                    "Butter (optional)"
+                ],
+                preparation: "1. Grind the grains\n2. Mix ingredients\n3. Cook on low heat\n4. Add sugar and butter if desired"
+            },
+            lemris: {
+                name: "Lemris",
+                description: "A traditional soup that varies by region, made with buttermilk or butter and various ingredients.",
+                ingredients: [
+                    "Grains",
+                    "Buttermilk or butter",
+                    "Spices",
+                    "Vegetables (varies by region)"
+                ],
+                preparation: "1. Cook the grains\n2. Add vegetables and spices\n3. Add buttermilk or butter\n4. Simmer until flavors combine"
+            },
+            tafernut: {
+                name: "Tafernut",
+                description: "Traditional round Amazigh bread baked in clay ovens, typically served with argan oil or natural butter. This bread is a staple of Amazigh cuisine and is known for its unique texture and flavor.",
+                ingredients: [
+                    "Wheat flour",
+                    "Yeast",
+                    "Salt",
+                    "Warm water",
+                    "Argan oil or natural butter (for serving)"
+                ],
+                preparation: "1. Mix flour, yeast, salt, and warm water to make dough\n2. Let the dough rise until doubled in size\n3. Shape into round loaves\n4. Bake in traditional clay oven until golden brown\n5. Serve warm with argan oil or butter"
+            },
+            taqsha: {
+                name: "Taqsha (Bissara)",
+                description: "Traditional fava bean soup made with dried and mashed fava beans, olive oil, and spices.",
+                ingredients: [
+                    "Dried fava beans",
+                    "Garlic",
+                    "Olive oil",
+                    "Cumin",
+                    "Hot pepper (optional)"
+                ],
+                preparation: "1. Soak and boil fava beans\n2. Mash beans with garlic\n3. Add spices and olive oil\n4. Cook until well combined"
+            }
+        };
+
+        // Modal functionality
+        const modal = document.getElementById('foodModal');
+        const foodCards = document.querySelectorAll('.food-card');
+        const closeModal = document.querySelector('.close-modal');
+
+        foodCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const foodType = card.dataset.food;
+                const food = foodData[foodType];
+                
+                if (food) {
+                    modal.querySelector('.modal-header h2').textContent = food.name;
+                    modal.querySelector('.modal-image img').src = `../images/foods/${foodType}.jpg`;
+                    modal.querySelector('.modal-image img').alt = food.name;
+                    modal.querySelector('.description').textContent = food.description;
+                    
+                    const ingredientsList = modal.querySelector('.ingredients-list');
+                    ingredientsList.innerHTML = '';
+                    food.ingredients.forEach(ingredient => {
+                        const li = document.createElement('li');
+                        li.textContent = ingredient;
+                        ingredientsList.appendChild(li);
+                    });
+                    
+                    modal.querySelector('.preparation').textContent = food.preparation;
+                    modal.classList.add('active');
+                }
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Sidebar functionality
+        const sidebar = document.querySelector(".sidebar");
+        const sidebarOpen = document.querySelector("#sidebar-open");
+        const sidebarClose = document.querySelector("#sidebar-close");
+
+        sidebarOpen.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
+        sidebarClose.addEventListener("click", () => {
+            sidebar.classList.add("close");
+        });
+    </script>
+</body>
+</html>

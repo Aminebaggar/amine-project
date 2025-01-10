@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazigh Musicians</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main-container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .page-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .page-title span {
+            color: #e74c3c;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, #2c3e50, #e74c3c, #2c3e50);
+        }
+
+        .musicians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .musician-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .musician-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .musician-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .musician-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .musician-card:hover .musician-image img {
+            transform: scale(1.1);
+        }
+
+        .musician-info {
+            padding: 1.5rem;
+        }
+
+        .musician-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .musician-style {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .musician-description {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .musician-card.expanded .musician-description {
+            max-height: none;
+        }
+
+        .expand-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .musician-card.expanded .expand-btn {
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar locked">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_items">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="music.html" class="link flex active">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="nav">
+        <i class='bx bx-menu' id="sidebar-open"></i>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-title">
+            <h1>Amazigh <span>Musicians</span></h1>
+        </div>
+        <div class="musicians-grid">
+            <!-- Musicians will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const musicians = [
+            {
+                name: "Mohamed Rouicha",
+                style: "Traditional Amazigh Music",
+                image: "../images/mohamed-rouicha.jpg",
+                shortDesc: "Legendary Amazigh musician known as 'The Master of Loutar'.",
+                longDesc: "Mohamed Rouicha was one of the most influential Amazigh musicians of the 20th century. Born in Khenifra, he mastered the Loutar at a young age and revolutionized its playing technique. His music blended traditional Amazigh rhythms with innovative compositions.",
+                achievements: [
+                    "Master of Loutar instrument",
+                    "Revolutionized traditional music",
+                    "Cultural ambassador",
+                    "Influenced generations"
+                ]
+            },
+            {
+                name: "Ahouzar",
+                style: "Modern Amazigh",
+                image: "../images/ahouzar.jpg",
+                shortDesc: "Contemporary voice of Amazigh music.",
+                longDesc: "Ahouzar has brought Amazigh music to modern audiences while maintaining its traditional essence. His unique style combines classic rhythms with contemporary arrangements, making Amazigh music accessible to new generations.",
+                achievements: [
+                    "Modernized traditional sounds",
+                    "Popular among youth",
+                    "Chart-topping hits",
+                    "Festival headliner"
+                ]
+            },
+            {
+                name: "Ammouri Mbarek",
+                style: "Fusion Amazigh",
+                image: "../images/ammouri-mbarek.jpg",
+                shortDesc: "Pioneer of Amazigh music fusion from Agadir.",
+                longDesc: "From Agadir, Souss region, Ammouri Mbarek revolutionized Moroccan Amazigh music with hits like 'Ayoul Ino'. His unique blend of traditional and modern styles has influenced generations while staying true to Tachelhit heritage.",
+                achievements: [
+                    "Created fusion style",
+                    "Preserved heritage",
+                    "Multiple hit albums",
+                    "International recognition"
+                ]
+            },
+            {
+                name: "Fatima Tihihit",
+                style: "Traditional Tachelhit",
+                image: "../images/fatima-tihihit.jpg",
+                shortDesc: "Powerful female voice of Amazigh music.",
+                longDesc: "A powerful female voice from the Souss region of Morocco. Known for her emotional performances and preservation of traditional Amazigh women's songs. Her hits like 'Araw Ino' and 'Tayri' have made her one of the most respected Amazigh artists.",
+                achievements: [
+                    "Preserved women's songs",
+                    "Cultural ambassador",
+                    "Multiple awards",
+                    "Inspired female artists"
+                ]
+            },
+            {
+                name: "Izenzaren",
+                style: "Amazigh Rock",
+                image: "../images/izenzaren.jpg",
+                shortDesc: "Pioneering Amazigh rock band.",
+                longDesc: "Izenzaren revolutionized Amazigh music by introducing electric instruments to traditional sounds. They were among the first to blend rock music with Amazigh rhythms, creating a unique fusion that inspired many modern bands.",
+                achievements: [
+                    "First electric Amazigh band",
+                    "Created new genre",
+                    "Influenced modern bands",
+                    "Cultural preservation"
+                ]
+            },
+            {
+                name: "Oudaden",
+                style: "Traditional Ensemble",
+                image: "../images/oudaden.jpg",
+                shortDesc: "Legendary group preserving authentic Amazigh music.",
+                longDesc: "Oudaden has been at the forefront of preserving traditional Amazigh music. Their authentic approach to performance and arrangement has made them cultural ambassadors, specializing in collective performances that showcase traditional instruments.",
+                achievements: [
+                    "Preserved traditions",
+                    "Group performance masters",
+                    "Cultural impact",
+                    "Festival favorites"
+                ]
+            },
+            {
+                name: "Raiss Abdelaziz Ahouzar",
+                style: "Souss Traditional",
+                image: "../images/raiss-abdelaziz-ahouzar.jpg",
+                shortDesc: "Master of Souss region traditional style.",
+                longDesc: "A distinguished artist from the Souss region of Morocco, known for his energetic performances and preservation of traditional Amazigh rhythms. His music celebrates the rich heritage of Moroccan Amazigh culture.",
+                achievements: [
+                    "Souss style master",
+                    "Traditional preservation",
+                    "Regional influence",
+                    "Cultural leadership"
+                ]
+            },
+            {
+                name: "Raiss Ahmed Amntag",
+                style: "Traditional Poetry",
+                image: "../images/raiss-ahmed-amntag.jpg",
+                shortDesc: "Master of traditional Amazigh poetry and song.",
+                longDesc: "Raiss Ahmed Amntag is renowned for his mastery of traditional Amazigh poetry and musical composition. His work preserves ancient poetic traditions while creating memorable melodies that resonate with audiences.",
+                achievements: [
+                    "Poetry master",
+                    "Composition expert",
+                    "Traditional preservation",
+                    "Mentored new artists"
+                ]
+            },
+            {
+                name: "Raiss Lhaj Belaaid",
+                style: "Traditional Ahwach",
+                image: "../images/raiss-lhaj-belaaid.jpg",
+                shortDesc: "Master of Ahwach style from Ouarzazate.",
+                longDesc: "A master from Ouarzazate region, known for his authentic Ahwach style. His contributions to preserving southern Moroccan Amazigh musical heritage are immeasurable, especially in traditional poetry.",
+                achievements: [
+                    "Ahwach preservation",
+                    "Poetry mastery",
+                    "Regional influence",
+                    "Cultural ambassador"
+                ]
+            },
+            {
+                name: "Raiss Mohamed El Hassane",
+                style: "Traditional",
+                image: "../images/raiss-mohamed-elhassane.jpg",
+                shortDesc: "Respected voice of traditional Amazigh music.",
+                longDesc: "Raiss Mohamed El Hassane has dedicated his career to preserving and promoting traditional Amazigh music. His authentic style and deep understanding of musical heritage have made him a respected figure in the community.",
+                achievements: [
+                    "Heritage preservation",
+                    "Traditional mastery",
+                    "Community leadership",
+                    "Cultural education"
+                ]
+            },
+            {
+                name: "Raiss Omar Wahrouch",
+                style: "Atlas Mountain Music",
+                image: "../images/raiss-omar-wahrouch.jpg",
+                shortDesc: "Powerful voice from the High Atlas.",
+                longDesc: "From the High Atlas Mountains of Morocco, his powerful voice has become synonymous with authentic Amazigh music. His hit 'Atigui Siwa Rbi' showcases the rich traditions of Atlas Amazigh culture.",
+                achievements: [
+                    "Mountain style master",
+                    "Traditional preservation",
+                    "Regional icon",
+                    "Cultural ambassador"
+                ]
+            },
+            {
+                name: "Rays Said Achtouk",
+                style: "Souss Traditional",
+                image: "../images/rays-said-achtouk.jpg",
+                shortDesc: "Guardian of Souss musical traditions.",
+                longDesc: "Rays Said Achtouk has dedicated his life to preserving and promoting the traditional music of the Souss region. His authentic performances and deep knowledge of traditional styles have made him a respected figure.",
+                achievements: [
+                    "Traditional preservation",
+                    "Regional influence",
+                    "Cultural education",
+                    "Community leadership"
+                ]
+            },
+            {
+                name: "Ahmed Badouj",
+                style: "Modern Fusion",
+                image: "../images/ahmed-badouj.jpg",
+                shortDesc: "Modern voice blending tradition with new styles.",
+                longDesc: "Ahmed Badouj represents the new generation of Amazigh musicians who seamlessly blend traditional elements with contemporary styles. His innovative approach has helped bring Amazigh music to younger audiences.",
+                achievements: [
+                    "Modern innovation",
+                    "Youth engagement",
+                    "Contemporary fusion",
+                    "Digital presence"
+                ]
+            }
+        ];
+
+        function createMusicianCard(musician) {
+            return `
+                <div class="musician-card">
+                    <div class="musician-image">
+                        <img src="${musician.image}" alt="${musician.name}">
+                    </div>
+                    <div class="musician-info">
+                        <h3 class="musician-name">${musician.name}</h3>
+                        <div class="musician-style">${musician.style}</div>
+                        <p class="musician-description short">${musician.shortDesc}</p>
+                        <p class="musician-description long" style="display: none">${musician.longDesc}</p>
+                        <div class="achievements">
+                            <h4>Notable Achievements</h4>
+                            <ul>
+                                ${musician.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="expand-btn">+</button>
+                </div>
+            `;
+        }
+
+        // Populate musicians
+        const grid = document.querySelector('.musicians-grid');
+        musicians.forEach(musician => {
+            grid.innerHTML += createMusicianCard(musician);
+        });
+
+        // Animate cards on scroll
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function animateCards() {
+            document.querySelectorAll('.musician-card:not(.animate)').forEach(card => {
+                if (isElementInViewport(card)) {
+                    card.classList.add('animate');
+                }
+            });
+        }
+
+        // Initial animation
+        setTimeout(animateCards, 100);
+
+        // Animate on scroll
+        window.addEventListener('scroll', animateCards);
+
+        // Add click handlers
+        document.querySelectorAll('.musician-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList.contains('expand-btn')) {
+                    const shortDesc = this.querySelector('.musician-description.short');
+                    const longDesc = this.querySelector('.musician-description.long');
+                    const expandBtn = this.querySelector('.expand-btn');
+
+                    this.classList.toggle('expanded');
+                    
+                    if (this.classList.contains('expanded')) {
+                        shortDesc.style.display = 'none';
+                        longDesc.style.display = 'block';
+                        expandBtn.textContent = '-';
+                    } else {
+                        shortDesc.style.display = 'block';
+                        longDesc.style.display = 'none';
+                        expandBtn.textContent = '+';
+                    }
+                }
+            });
+        });
+
+        // Sidebar functionality
+        const sidebar = document.querySelector(".sidebar");
+        const sidebarOpen = document.querySelector("#sidebar-open");
+        const sidebarClose = document.querySelector("#sidebar-close");
+        const lockIcon = document.querySelector("#lock-icon");
+
+        // Toggle sidebar
+        sidebarOpen.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
+        sidebarClose.addEventListener("click", () => {
+            sidebar.classList.add("close");
+        });
+
+        // Toggle lock
+        lockIcon.addEventListener("click", () => {
+            sidebar.classList.toggle("locked");
+            if (sidebar.classList.contains("locked")) {
+                lockIcon.classList.replace("bx-lock-open-alt", "bx-lock-alt");
+            } else {
+                lockIcon.classList.replace("bx-lock-alt", "bx-lock-open-alt");
+            }
+        });
+    </script>
+</body>
+</html>

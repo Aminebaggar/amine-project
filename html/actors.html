@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazigh Actors</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+        }
+
+        .main-container {
+            padding: 2rem;
+            margin-left: 260px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.close ~ .main-container {
+            margin-left: 0;
+        }
+
+        .actors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .actor-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .actor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .actor-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .actor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .actor-card:hover .actor-image img {
+            transform: scale(1.05);
+        }
+
+        .actor-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .actor-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            color: #2c3e50;
+        }
+
+        .actor-role {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .actor-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            max-height: 4.8em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .actor-card.expanded .actor-description {
+            max-height: none;
+        }
+
+        .expand-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: #c0392b;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .page-title span {
+            color: #e74c3c;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .actors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading"></div>
+    
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="actors.html" class="link flex active">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="nav">
+        <i class='bx bx-menu' id="sidebar-open"></i>
+    </nav>
+
+    <div class="main-container page-transition">
+        <div class="page-title">
+            <h1>Amazigh <span>Actors</span></h1>
+        </div>
+        <div class="actors-grid grid-container">
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/aziz-dadas.jpg" alt="Aziz Dadas">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Aziz Dadas</h2>
+                    <p class="actor-role">Actor & Comedian</p>
+                    <p class="actor-description scroll-animate">One of Morocco's most beloved comedic actors, known for his exceptional comedic timing and versatile performances.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/hassan-elfad.jpg" alt="Hassan El Fad">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Hassan El Fad</h2>
+                    <p class="actor-role">Actor & Playwright</p>
+                    <p class="actor-description scroll-animate">A multitalented artist who excels in both acting and playwriting, known for addressing social issues through comedy and drama.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/mohamed-benbrahim.jpg" alt="Mohamed Benbrahim">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Mohamed Benbrahim</h2>
+                    <p class="actor-role">Veteran Actor</p>
+                    <p class="actor-description scroll-animate">A respected veteran of Moroccan cinema and theater, with a career spanning several decades.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/mohamed-khouyi.jpg" alt="Mohamed Khouyi">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Mohamed Khouyi</h2>
+                    <p class="actor-role">Actor & Director</p>
+                    <p class="actor-description scroll-animate">A talented dramatic actor known for bringing depth and authenticity to his characters.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/Rachid-ElOuali-1261.jpg" alt="Rachid El Ouali">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Rachid El Ouali</h2>
+                    <p class="actor-role">Actor & Producer</p>
+                    <p class="actor-description scroll-animate">A prominent figure in Moroccan entertainment, known for his contributions both in front of and behind the camera.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+
+            <div class="actor-card grid-item card-hover">
+                <div class="actor-image image-hover">
+                    <img src="../images/lahoucine-ibourka.jpg" alt="Lahoucine Ibourka">
+                </div>
+                <div class="actor-info">
+                    <h2 class="actor-name text-reveal">Lahoucine Ibourka</h2>
+                    <p class="actor-role">Actor & Cultural Icon</p>
+                    <p class="actor-description scroll-animate">A cultural ambassador who has made significant contributions to Amazigh cinema and theater.</p>
+                    <button class="expand-btn btn-hover">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        // Add click handlers for expand buttons
+        document.querySelectorAll('.expand-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.actor-card');
+                card.classList.toggle('expanded');
+                this.textContent = card.classList.contains('expanded') ? '-' : '+';
+            });
+        });
+
+        // Activate text reveal animations when scrolled into view
+        const textRevealElements = document.querySelectorAll('.text-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        textRevealElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

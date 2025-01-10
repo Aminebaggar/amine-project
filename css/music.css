@@ -1,0 +1,73 @@
+/* Music Group Grid Styling */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.music-profile {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.8s ease-out;
+    overflow: hidden;
+    color: #2c3e50;
+}
+
+.music-profile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.music-profile h2 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.music-profile img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    transition: transform 0.5s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.music-profile:hover img {
+    transform: scale(1.05);
+}
+
+.music-profile p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add animation delay for each card */
+.music-profile:nth-child(1) { animation-delay: 0.1s; }
+.music-profile:nth-child(2) { animation-delay: 0.2s; }
+.music-profile:nth-child(3) { animation-delay: 0.3s; }
+.music-profile:nth-child(4) { animation-delay: 0.4s; }
+.music-profile:nth-child(5) { animation-delay: 0.5s; }
+.music-profile:nth-child(6) { animation-delay: 0.6s; }
+.music-profile:nth-child(7) { animation-delay: 0.7s; }
+.music-profile:nth-child(8) { animation-delay: 0.8s; }

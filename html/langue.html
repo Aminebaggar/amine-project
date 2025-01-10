@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazigh Language - Numbers & More</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .container {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 2rem 0;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            border-radius: 2px;
+        }
+
+        .numbers-grid, .phrases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .number-card, .phrase-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .number-card:hover, .phrase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .amazigh-text {
+            font-size: 1.3rem;
+            color: #e74c3c;
+            margin: 0.5rem 0;
+        }
+
+        .arabic-text {
+            font-size: 1.2rem;
+            color: #27ae60;
+            margin: 0.5rem 0;
+            direction: rtl;
+        }
+
+        .english-text {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin: 0.5rem 0;
+        }
+
+        .pronunciation {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-subtitle {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: #f1f1f1;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .phrases-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="../images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="../index.html" class="link flex">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="langue.html" class="link flex active">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="section-title">Learn Amazigh Language</h1>
+
+        <div class="tab-container">
+            <button class="tab-button active" onclick="openTab('numbers')">Numbers</button>
+            <button class="tab-button" onclick="openTab('greetings')">Greetings</button>
+            <button class="tab-button" onclick="openTab('colors')">Colors</button>
+            <button class="tab-button" onclick="openTab('family')">Family</button>
+            <button class="tab-button" onclick="openTab('common')">Common Phrases</button>
+            <button class="tab-button" onclick="openTab('time')">Time & Days</button>
+        </div>
+
+        <div id="numbers" class="tab-content active">
+            <div class="language-section">
+                <h2 class="section-subtitle">About Amazigh Numbers</h2>
+                <p class="info-text">
+                    The Amazigh number system is an essential part of the Tamazight language. These numbers have been used for centuries 
+                    by Amazigh people across North Africa. The system is vigesimal (base-20) in its traditional form, though modern usage 
+                    often adapts to the decimal system.
+                </p>
+                <div class="note">
+                    Note: Pronunciations may vary slightly between different Amazigh dialects.
+                </div>
+            </div>
+
+            <div class="numbers-grid">
+                <div class="number-card">
+                    <div class="number">1</div>
+                    <div class="amazigh-number">Yan / يان</div>
+                    <div class="pronunciation">(yān)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">2</div>
+                    <div class="amazigh-number">Sin / سين</div>
+                    <div class="pronunciation">(sīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">3</div>
+                    <div class="amazigh-number">Krad / كراض</div>
+                    <div class="pronunciation">(krāḍ)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">4</div>
+                    <div class="amazigh-number">Kkuz / كوز</div>
+                    <div class="pronunciation">(kkūz)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">5</div>
+                    <div class="amazigh-number">Semmus / سموس</div>
+                    <div class="pronunciation">(semmūs)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">6</div>
+                    <div class="amazigh-number">Sedis / سديس</div>
+                    <div class="pronunciation">(sedīs)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">7</div>
+                    <div class="amazigh-number">Sa / سا</div>
+                    <div class="pronunciation">(sā)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">8</div>
+                    <div class="amazigh-number">Tam / تام</div>
+                    <div class="pronunciation">(tām)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">9</div>
+                    <div class="amazigh-number">Tza / تزا</div>
+                    <div class="pronunciation">(tzā)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">10</div>
+                    <div class="amazigh-number">Mraw / مراو</div>
+                    <div class="pronunciation">(mrāw)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">20</div>
+                    <div class="amazigh-number">ʿichrin / عشرين</div>
+                    <div class="pronunciation">(ʿichrīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">30</div>
+                    <div class="amazigh-number">Tlatin / تلاتين</div>
+                    <div class="pronunciation">(tlātīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">40</div>
+                    <div class="amazigh-number">Rbʿin / ربعين</div>
+                    <div class="pronunciation">(rbʿīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">50</div>
+                    <div class="amazigh-number">Xemsin / خمسين</div>
+                    <div class="pronunciation">(khemsīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">60</div>
+                    <div class="amazigh-number">Settin / ستين</div>
+                    <div class="pronunciation">(settīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">70</div>
+                    <div class="amazigh-number">Sebʿin / سبعين</div>
+                    <div class="pronunciation">(sebʿīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">80</div>
+                    <div class="amazigh-number">Tmanin / تمانين</div>
+                    <div class="pronunciation">(tmānīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">90</div>
+                    <div class="amazigh-number">Tesʿin / تسعين</div>
+                    <div class="pronunciation">(tesʿīn)</div>
+                </div>
+                <div class="number-card">
+                    <div class="number">100</div>
+                    <div class="amazigh-number">Miya / مية</div>
+                    <div class="pronunciation">(mīya)</div>
+                </div>
+            </div>
+
+            <div class="language-section">
+                <h2 class="section-subtitle">Additional Language Features</h2>
+                <p class="info-text">
+                    The Amazigh language, also known as Tamazight, is rich in its numerical expressions. Numbers can be combined 
+                    to form larger values, and there are specific rules for counting different types of objects. The language also 
+                    includes various numerical prefixes and suffixes that modify the meaning of numbers in different contexts.
+                </p>
+                <div class="note">
+                    The Amazigh number system reflects the deep mathematical understanding of the Amazigh people and their 
+                    contribution to North African culture and commerce throughout history.
+                </div>
+            </div>
+        </div>
+
+        <div id="greetings" class="tab-content">
+            <div class="category-section">
+                <h2 class="section-subtitle">Greetings & Basic Expressions</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="category-title">Hello</div>
+                        <div class="amazigh-text">Azul</div>
+                        <div class="arabic-text">أزول</div>
+                        <div class="pronunciation">(azūl)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Good Morning</div>
+                        <div class="amazigh-text">Sbah Ameggaz</div>
+                        <div class="arabic-text">صباح أمڭاز</div>
+                        <div class="pronunciation">(ṣbāḥ ameggāz)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Good Evening</div>
+                        <div class="amazigh-text">Tafukt Tameggazt</div>
+                        <div class="arabic-text">تافوكت تامڭازت</div>
+                        <div class="pronunciation">(tāfukt tameggāzt)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">How are you?</div>
+                        <div class="amazigh-text">Mamnk allik?</div>
+                        <div class="arabic-text">مامنك اليك؟</div>
+                        <div class="pronunciation">(māmnk allīk?)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">I'm fine</div>
+                        <div class="amazigh-text">Labas</div>
+                        <div class="arabic-text">لاباس</div>
+                        <div class="pronunciation">(lābās)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Thank you</div>
+                        <div class="amazigh-text">Tanemmirt</div>
+                        <div class="arabic-text">تانميرت</div>
+                        <div class="pronunciation">(tānemmīrt)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="colors" class="tab-content">
+            <div class="category-section">
+                <h2 class="section-subtitle">Colors</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="category-title">White</div>
+                        <div class="amazigh-text">Amellal</div>
+                        <div class="arabic-text">أملال</div>
+                        <div class="pronunciation">(amellāl)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Black</div>
+                        <div class="amazigh-text">Aberkan</div>
+                        <div class="arabic-text">أبركان</div>
+                        <div class="pronunciation">(aberkān)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Red</div>
+                        <div class="amazigh-text">Azegzaw</div>
+                        <div class="arabic-text">أزڭزاو</div>
+                        <div class="pronunciation">(azegzāw)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Blue</div>
+                        <div class="amazigh-text">Anili</div>
+                        <div class="arabic-text">أنيلي</div>
+                        <div class="pronunciation">(anīlī)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Green</div>
+                        <div class="amazigh-text">Azegza</div>
+                        <div class="arabic-text">أزڭزا</div>
+                        <div class="pronunciation">(azegzā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Yellow</div>
+                        <div class="amazigh-text">Awraɣ</div>
+                        <div class="arabic-text">أوراغ</div>
+                        <div class="pronunciation">(awrāgh)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="family" class="tab-content">
+            <div class="category-section">
+                <h2 class="section-subtitle">Family Terms</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="category-title">Father</div>
+                        <div class="amazigh-text">Baba</div>
+                        <div class="arabic-text">بابا</div>
+                        <div class="pronunciation">(bābā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Mother</div>
+                        <div class="amazigh-text">Yemma</div>
+                        <div class="arabic-text">يما</div>
+                        <div class="pronunciation">(yemmā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Brother</div>
+                        <div class="amazigh-text">Gma</div>
+                        <div class="arabic-text">ڭما</div>
+                        <div class="pronunciation">(gmā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Sister</div>
+                        <div class="amazigh-text">Ultma</div>
+                        <div class="arabic-text">ولتما</div>
+                        <div class="pronunciation">(ultmā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Grandfather</div>
+                        <div class="amazigh-text">Jeddi</div>
+                        <div class="arabic-text">جدي</div>
+                        <div class="pronunciation">(jeddī)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Grandmother</div>
+                        <div class="amazigh-text">Jidda</div>
+                        <div class="arabic-text">جدا</div>
+                        <div class="pronunciation">(jiddā)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="common" class="tab-content">
+            <div class="category-section">
+                <h2 class="section-subtitle">Common Phrases</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="category-title">Yes</div>
+                        <div class="amazigh-text">Yah</div>
+                        <div class="arabic-text">ياه</div>
+                        <div class="pronunciation">(yāh)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">No</div>
+                        <div class="amazigh-text">Uhu</div>
+                        <div class="arabic-text">أوهو</div>
+                        <div class="pronunciation">(uhū)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Please</div>
+                        <div class="amazigh-text">Sabalak</div>
+                        <div class="arabic-text">سابالاك</div>
+                        <div class="pronunciation">(sābālāk)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Welcome</div>
+                        <div class="amazigh-text">Merhba</div>
+                        <div class="arabic-text">مرحبا</div>
+                        <div class="pronunciation">(merḥbā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Goodbye</div>
+                        <div class="amazigh-text">Bslama</div>
+                        <div class="arabic-text">بسلامة</div>
+                        <div class="pronunciation">(bslāmā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">I love you</div>
+                        <div class="amazigh-text">Riɣ kem/k</div>
+                        <div class="arabic-text">ريغ كم/ك</div>
+                        <div class="pronunciation">(rīgh kem/k)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="time" class="tab-content">
+            <div class="category-section">
+                <h2 class="section-subtitle">Time & Days</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="category-title">Today</div>
+                        <div class="amazigh-text">Assa</div>
+                        <div class="arabic-text">اسا</div>
+                        <div class="pronunciation">(assā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Tomorrow</div>
+                        <div class="amazigh-text">Askka</div>
+                        <div class="arabic-text">اسكا</div>
+                        <div class="pronunciation">(askkā)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Yesterday</div>
+                        <div class="amazigh-text">Idgam</div>
+                        <div class="arabic-text">إدڭام</div>
+                        <div class="pronunciation">(idgām)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Morning</div>
+                        <div class="amazigh-text">Sbah</div>
+                        <div class="arabic-text">صباح</div>
+                        <div class="pronunciation">(ṣbāḥ)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Evening</div>
+                        <div class="amazigh-text">Tameddit</div>
+                        <div class="arabic-text">تامديت</div>
+                        <div class="pronunciation">(tāmeddīt)</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="category-title">Night</div>
+                        <div class="amazigh-text">Yid</div>
+                        <div class="arabic-text">ييد</div>
+                        <div class="pronunciation">(yīd)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openTab(tabName) {
+        // Hide all tab contents
+        var tabContents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+
+        // Remove active class from all buttons
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("active");
+        }
+
+        // Show the selected tab content
+        document.getElementById(tabName).classList.add("active");
+
+        // Add active class to the clicked button
+        event.currentTarget.classList.add("active");
+    }
+    </script>
+</body>
+</html>
