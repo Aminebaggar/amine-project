@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hoverable Sidebar Menu HTML CSS & JavaScript</title>
+
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .language-button {
+            background: #4070f4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .language-button:hover + .language-menu,
+        .language-menu:hover {
+            display: block;
+        }
+
+        .language-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 5px;
+            min-width: 120px;
+        }
+
+        .language-menu-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .language-menu-item:hover {
+            background: #f5f5f5;
+        }
+
+        [dir="rtl"] .language-switcher {
+            left: auto;
+            right: 20px;
+        }
+
+        [dir="rtl"] .sidebar {
+            right: 0;
+            left: auto;
+        }
+
+        [dir="rtl"] .content-area {
+            margin-right: 260px;
+            margin-left: 0;
+        }
+
+        [dir="rtl"] .sidebar.close ~ .content-area {
+            margin-right: 65px;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="language-button">
+            <i class='bx bx-globe'></i>
+            <span data-translate="language">EN</span>
+        </button>
+        <div class="language-menu">
+            <div class="language-menu-item" data-lang="en">English</div>
+            <div class="language-menu-item" data-lang="ar">العربية</div>
+        </div>
+    </div>
+
+    <nav class="sidebar locked">
+        <div class="logo_items flex">
+            <span class="nav_image">
+                <img src="images/s-icon.png" alt="logo_img" />
+            </span>
+            <span class="logo_name">AMINE BAGGARI</span>
+            <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
+            <i class="bx bx-x" id="sidebar-close"></i>
+        </div>
+
+        <div class="menu_container">
+            <div class="menu_items">
+                <ul class="menu_item">
+                    <li class="item">
+                        <a href="index.html" class="link flex active">
+                            <i class='bx bx-home-alt'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/story.html" class="link flex">
+                            <i class='bx bx-book-alt'></i>
+                            <span>Story</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/actors.html" class="link flex">
+                            <i class='bx bx-camera-movie'></i>
+                            <span>Amazigh Actors</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/clothes.html" class="link flex">
+                            <i class='bx bx-closet'></i>
+                            <span>Amazigh Clothes</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/foods.html" class="link flex">
+                            <i class='bx bx-food-menu'></i>
+                            <span>Traditional Foods</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/music.html" class="link flex">
+                            <i class='bx bx-music'></i>
+                            <span>Amazigh Singers</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/characters.html" class="link flex">
+                            <i class='bx bx-user'></i>
+                            <span>Famous Characters</span>
+                        </a>
+                    </li>
+
+                    <li class="item">
+                        <a href="html/langue.html" class="link flex">
+                            <i class='bx bx-book-content'></i>
+                            <span>Amazigh Language</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar_profile flex">
+            <span class="nav_image">
+                <img src="images/profile.jpg" alt="logo_img" />
+            </span>
+            <div class="data_text">
+                <span class="name">Amine Baggari</span>
+                <span class="email">aminebaggari12@gmail.com</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-area">
+        <div class="home">
+            <!-- Welcome Section -->
+            <div class="content-section active" id="welcome">
+                <div class="welcome-hero">
+                    <div class="hero-content">
+                        <h1 data-translate="welcomeTitle">Welcome to Amazigh Culture</h1>
+                        <p class="hero-subtitle" data-translate="welcomeSubtitle">Discover the Rich Heritage of North Africa</p>
+                        <div class="hero-description">
+                            <p data-translate="welcomeDescription">Explore the fascinating world of Amazigh culture, from traditional cuisine to elegant clothing, and immerse yourself in our ancient history.</p>
+                        </div>
+                    </div>
+                    <div class="hero-cards">
+                        <div class="hero-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <img src="images/food-hero.jpg" alt="Traditional Foods">
+                                    <h3 data-translate="traditionalFoods">Traditional Foods</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 data-translate="foods">Amazigh Cuisine</h3>
+                                    <p data-translate="foods.description">Discover authentic flavors and traditional recipes passed down through generations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <img src="images/clothes-hero.jpg" alt="Traditional Clothes">
+                                    <h3 data-translate="traditionalClothes">Traditional Clothes</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 data-translate="clothes">Amazigh Fashion</h3>
+                                    <p data-translate="clothes.description">Explore the beautiful and intricate designs of traditional Amazigh clothing.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <img src="images/history-hero.jpg" alt="Rich History">
+                                    <h3 data-translate="storyTitle">Rich History</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 data-translate="culture.title">Our Heritage</h3>
+                                    <p data-translate="culture.description">Learn about the ancient traditions and cultural significance of the Amazigh people.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll-indicator">
+                        <p data-translate="exploreMore">Explore More</p>
+                        <i class='bx bx-chevron-down'></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other sections (initially hidden) -->
+            <div class="content-section" id="amazigh-foods">
+                <h2 data-translate="foods.title">Traditional Amazigh Foods</h2>
+                <div class="content-grid">
+                    <div class="content-card" data-food="couscous">
+                        <div class="card-image">
+                            <img src="images/couscous.jpg" alt="Couscous">
+                            <div class="card-overlay">
+                                <h3 data-translate="couscous.title">Couscous</h3>
+                                <p data-translate="couscous.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-food="tagine">
+                        <div class="card-image">
+                            <img src="images/tagine.jpg" alt="Tagine">
+                            <div class="card-overlay">
+                                <h3 data-translate="tagine.title">Tagine</h3>
+                                <p data-translate="tagine.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-food="rfissa">
+                        <div class="card-image">
+                            <img src="images/rfissa.jpg" alt="Rfissa">
+                            <div class="card-overlay">
+                                <h3 data-translate="rfissa.title">Rfissa</h3>
+                                <p data-translate="rfissa.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-food="harira">
+                        <div class="card-image">
+                            <img src="images/harira.jpg" alt="Harira">
+                            <div class="card-overlay">
+                                <h3 data-translate="harira.title">Harira</h3>
+                                <p data-translate="harira.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-food="bissara">
+                        <div class="card-image">
+                            <img src="images/bissara.jpg" alt="Bissara">
+                            <div class="card-overlay">
+                                <h3 data-translate="bissara.title">Bissara</h3>
+                                <p data-translate="bissara.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-food="pastilla">
+                        <div class="card-image">
+                            <img src="images/pastilla.jpg" alt="Pastilla">
+                            <div class="card-overlay">
+                                <h3 data-translate="pastilla.title">Pastilla</h3>
+                                <p data-translate="pastilla.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="amazigh-clothes">
+                <h2 data-translate="clothes.title">Traditional Amazigh Clothes</h2>
+                <div class="content-grid">
+                    <div class="content-card" data-clothes="kaftan">
+                        <div class="card-image">
+                            <img src="images/kaftan.jpg" alt="Traditional Kaftan">
+                            <div class="card-overlay">
+                                <h3 data-translate="kaftan.title">Traditional Kaftan</h3>
+                                <p data-translate="kaftan.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-clothes="djellaba">
+                        <div class="card-image">
+                            <img src="images/djellaba.jpg" alt="Djellaba">
+                            <div class="card-overlay">
+                                <h3 data-translate="djellaba.title">Djellaba</h3>
+                                <p data-translate="djellaba.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-clothes="burnous">
+                        <div class="card-image">
+                            <img src="images/burnous.jpg" alt="Burnous">
+                            <div class="card-overlay">
+                                <h3 data-translate="burnous.title">Burnous</h3>
+                                <p data-translate="burnous.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-clothes="jewelry">
+                        <div class="card-image">
+                            <img src="images/jewelry.jpg" alt="Traditional Jewelry">
+                            <div class="card-overlay">
+                                <h3 data-translate="jewelry.title">Traditional Jewelry</h3>
+                                <p data-translate="jewelry.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-clothes="headwear">
+                        <div class="card-image">
+                            <img src="images/headwear.jpg" alt="Traditional Headwear">
+                            <div class="card-overlay">
+                                <h3 data-translate="headwear.title">Traditional Headwear</h3>
+                                <p data-translate="headwear.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-card" data-clothes="accessories">
+                        <div class="card-image">
+                            <img src="images/accessories.jpg" alt="Traditional Accessories">
+                            <div class="card-overlay">
+                                <h3 data-translate="accessories.title">Traditional Accessories</h3>
+                                <p data-translate="accessories.description">Click to learn more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="amazigh-story">
+                <!-- Content for story will be similar structure -->
+            </div>
+            
+            <div class="content-section" id="amazigh-wars-type">
+                <!-- Content for wars type will be similar structure -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Clothes Modal -->
+    <div class="modal" id="clothesModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 data-translate="clothesModal.title"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="" alt="">
+                </div>
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3><i class='bx bx-info-circle'></i> <span data-translate="description">Description</span></h3>
+                        <p class="description" data-translate="description.text"></p>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class='bx bx-palette'></i> <span data-translate="materials">Materials & Design</span></h3>
+                        <ul class="materials" data-translate="materials.list"></ul>
+                    </div>
+                    <div class="info-section">
+                        <h3><i class='bx bx-book-heart'></i> <span data-translate="significance">Cultural Significance</span></h3>
+                        <p class="significance" data-translate="significance.text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="js/translations.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
